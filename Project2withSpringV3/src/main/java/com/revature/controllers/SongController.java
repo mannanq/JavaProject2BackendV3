@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Playlist;
 import com.revature.models.Song;
+import com.revature.repositories.SongRepository;
+import com.revature.services.PlaylistService;
 import com.revature.services.SongService;
 
 @RestController
@@ -24,6 +28,12 @@ public class SongController {
 
 		@Autowired
 		private SongService ss;
+		
+		@Autowired
+		private PlaylistService ps;
+		
+		@Autowired
+		private SongRepository sr;
 
 		@GetMapping
 		public List<Song> getAll() {
@@ -46,11 +56,41 @@ public class SongController {
 			return ss.findSongsByPlaylistByUserId(id);
 		}
 		*/
+		
 		@PostMapping
-		public ResponseEntity<Song> addSong(@RequestBody Song song) {
-			ss.addSong(song);
-			return new ResponseEntity<Song>(song, HttpStatus.CREATED);
+		public ResponseEntity<Song> addSong(@RequestParam("playlistId") Integer playlistId, @RequestParam("songName") String songName, @RequestParam("artistName") String artistName, @RequestParam("spotifySongId") String spotifySongId) {
+			Song s = ss.addSong(new Song(songName, artistName, spotifySongId));
+			//s.getSongId();
+			Playlist p = ps.findPlaylistById(playlistId);
+			List<Song> songs = p.getSongs();
+			songs.add(s);
+			sr.save(s);
+			return new ResponseEntity<Song>(s, HttpStatus.CREATED);
 		}
+		
+		
+		/*
+		 * 
+		 *public ResponseEntity<Playlist> addPlaylist(@RequestParam("playlistName") String playlistName, @RequestParam("userId") Integer userId) {
+		Playlist p = ps.addPlaylist(new Playlist(playlistName));
+		p.getPlaylistId();
+		
+		// This is how the associative tables are being populated automagically
+		
+		User u = us.findUserById(userId);
+		List<Playlist> playlists = u.getPlaylists();
+		playlists.add(p);
+		ur.save(u);
+		
+		// This is how the associative tables are being populated automagically
+		return new ResponseEntity<Playlist>(p, HttpStatus.CREATED);
+	}
+		 * 
+		 */
+		
+		
+		
+		
 		/*
 		@PostMapping
 		public ResponseEntity<Song> addSong(@RequestParam("spotifySongId") String spotifySongId, @RequestParam("playlistId") Integer playlistId) {

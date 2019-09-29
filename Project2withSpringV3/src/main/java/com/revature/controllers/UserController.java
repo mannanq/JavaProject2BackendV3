@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,24 +30,28 @@ public class UserController {
 	@Autowired
 	private PlaylistService ps;
 	
+	@CrossOrigin("http://localhost:4200")
 	@GetMapping
 	public List<User> getAll(){
 		
 		return us.findAllUsers();
 	}
 	
+	@CrossOrigin("http://localhost:4200")
 	@GetMapping("/{id}")
 	public User getUserById(@PathVariable("id")Integer id) {
 		//System.out.println("THIS IS MY ID: "+id);
 		return us.findUserById(id);
 	}
 	
+	@CrossOrigin("http://localhost:4200")
 	@GetMapping("/{userid}/playlists")
 	public User getAllPlayslistByUserId(@PathVariable("userid")Integer userid) {
 		//System.out.println("THIS IS MY ID: "+id);
 		return us.findAllPlaylistsByUserId(userid);
 	}
 	
+	@CrossOrigin("http://localhost:4200")
 	@GetMapping("/{userid}/playlists/{playlistid}")
 	public Playlist getPlayslistByUserIdAndPlaylistId(@PathVariable("userid") Integer userid, @PathVariable("playlistid") Integer playlistid) {
 		//System.out.println("THIS IS MY ID: "+id);
