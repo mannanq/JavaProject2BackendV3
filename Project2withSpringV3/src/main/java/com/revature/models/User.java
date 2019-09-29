@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -41,6 +44,12 @@ public class User implements Serializable {
 	
 	@Column(nullable = false)
 	private String password;
+	
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+@JoinColumn(name = "myId", referencedColumnName = "parentId")
+	 */
+	
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinTable(

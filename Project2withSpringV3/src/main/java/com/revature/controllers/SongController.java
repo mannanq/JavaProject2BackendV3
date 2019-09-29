@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Playlist;
 import com.revature.models.Song;
+import com.revature.repositories.PlaylistRepository;
 import com.revature.repositories.SongRepository;
 import com.revature.services.PlaylistService;
 import com.revature.services.SongService;
@@ -34,6 +35,9 @@ public class SongController {
 		
 		@Autowired
 		private SongRepository sr;
+		
+		@Autowired
+		private PlaylistRepository pr;
 
 		@GetMapping
 		public List<Song> getAll() {
@@ -106,7 +110,28 @@ public class SongController {
 		}
 
 		@DeleteMapping("/{id}")
-		public Song deleteSong(@PathVariable("id") Integer id) {
+		public Song deleteSong(@PathVariable("id") Integer id, @RequestParam("playlistId") Integer playlistId) {
+			
+			Playlist p = pr.getOne(playlistId);
+			System.out.println("Playlist of song being deleted:\n" + p);
+			
+			List<Song> songs = p.getSongs();
+			Song temp = null;
+			for (Song s : songs) {
+				System.out.println(s);
+				if (s.getSongId() == id) {
+					System.out.println("found song to remove");
+					temp = s;
+				}
+				
+			}
+			
+			songs.remove(temp);
+			
+			
+			pr.save(p);
+			
+			
 			return ss.deleteSong(new Song(id));
 		}
 	

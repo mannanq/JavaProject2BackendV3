@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,6 +34,12 @@ public class Playlist implements Serializable {
 	
 	private String name;
 
+	/*
+	 *  private Foo parentNode;
+
+    @OneToMany(mappedBy = "parentNode", cascade = CascadeType.REMOVE)
+	 */
+	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="playlist_song",
@@ -118,6 +127,11 @@ public class Playlist implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Playlist [playlistId=" + playlistId + ", name=" + name + ", songs=" + songs + "]";
 	}
 
 	

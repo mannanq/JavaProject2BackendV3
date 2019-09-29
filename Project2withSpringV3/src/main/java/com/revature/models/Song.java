@@ -28,9 +28,7 @@ public class Song implements Serializable {
 	private String artist;
 	
 	@Column(length=50)
-	private String spotifySongId;
-	
-	
+	private String spotifySongId;	
 	
 	public Song() {
 		super();

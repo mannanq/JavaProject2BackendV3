@@ -89,7 +89,34 @@ public class PlaylistController {
 	}
 
 	@DeleteMapping("/{id}")
-	public Playlist deletePlaylist(@PathVariable("id") Integer id) {
+	public Playlist deletePlaylist(@PathVariable("id") Integer id, @RequestParam("userId") Integer userid) {
+		
+		  // This is how the associative tables are being populated automagically
+		
+		User u = ur.findAllPlaylistsByUserId(userid);
+		System.out.println("USER of playlist being deleted:\n" + u);
+		
+		List<Playlist> playlists = u.getPlaylists();
+		Playlist temp = null;
+		for (Playlist p : playlists) {
+			System.out.println(p);
+			if (p.getPlaylistId() == id) {
+				System.out.println("found playlist to remove");
+				temp = p;
+			}
+			
+		}
+		
+		playlists.remove(temp);
+		
+		for (Playlist p : playlists) {
+			System.out.println(p);
+			
+		}
+		ur.save(u);
+		
+		// This is how the associative tables are being populated automagically
+		 
 		return ps.deletePlaylist(new Playlist(id));
 	}
 }
