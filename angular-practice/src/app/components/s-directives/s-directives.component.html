@@ -1,0 +1,29 @@
+<p>
+  s-directives works!
+</p>
+<div (mouseover)='changeCondition()'>
+<p *ngIf='condition'>Condition met</p>
+<p *ngIf='!!!!!condition'>!Condition met</p>
+</div>
+
+<br>
+<h5>List of cats</h5>
+<ul>
+  <li *ngFor='let c of cats'>#{{c.id*10}} Name: {{c.name}}</li>
+</ul>
+
+<table class="table table-hover">
+  <tr><th>ID</th><th>Name</th></tr>
+  <tr *ngFor='let c of cats'>
+    <td>{{c.id}}</td>
+    <td>{{c.name}}</td>
+  </tr>
+</table>
+
+<div [ngSwitch]='time'>
+  <!-- Because its a string we have to do "' '"-->
+  <span *ngSwitchCase="'night'">It's night time</span>
+  <span *ngSwitchCase="'day'">It's day time</span>
+  <span *ngSwitchDefault>It's ? time</span>
+
+</div>

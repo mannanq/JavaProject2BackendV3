@@ -1,0 +1,22 @@
+
+
+<div class="container">
+ 
+<table class="table table-hover">
+  <tr *ngIf="currentUser.firstname != null">
+    <th>Id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Username</th>
+    <th>Email</th>
+  </tr>
+  <tr>
+    <td> {{currentUser.userId}}</td>
+    <td> {{currentUser.firstname}}</td>
+    <td> {{currentUser.lastname}}</td>
+    <td> {{currentUser.username}}</td>
+    <td> {{currentUser.email}}</td>
+  </tr>
+</table>
+
+</div>

@@ -1,0 +1,33 @@
+<p>
+  get all users works!
+</p>
+
+<div class="container">
+  <div class="jumbotron">
+    <h2>All Users</h2>
+    <p>Click the button to get all of our users</p>
+    <button class="btn btn-info" (click)='getAllUsers()'>Get Users</button>
+  </div>
+ 
+  <table class="table table-hover" *ngIf='users.length > 0'>
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    <!--<tr *ngFor='let u of users' routerLink='/users/{{u.userId}}'>-->
+      <tr *ngFor='let u of users'>
+      <td> {{u.userId}}</td>
+      <td> {{u.firstname}}</td>
+      <td> {{u.lastname}}</td>
+      <td> {{u.username}}</td>
+      <td> {{u.email}}</td>
+     <!-- <button class="btn btn-info" (click)='addSong(u.userId)' *ngIf="showBtns[u.userId]">Add Song</button>-->
+      <td><input type="button" [ngStyle]='{"font-weight" : fontWeight[u.userId], "border-radius" : borderRadius}' [ngClass]='btnFormat[u.userId]' (click)='addSong(u.userId)' [(ngModel)]='addOrRemoveSong[u.userId]' name='addOrRemoveSong[u.userId]'></td>
+    </tr>
+  </table>
+
+</div>
