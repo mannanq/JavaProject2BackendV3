@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,12 +45,12 @@ public class SongController {
 
 			return ss.findAllSongs();
 		}
-
+		@CrossOrigin("http://localhost:4200")
 		@GetMapping("/{id}")
 		public Song getSongById(@PathVariable("id") Integer id) {
 			return ss.findSongById(id);
 		}
-		
+		@CrossOrigin("http://localhost:4200")
 		@GetMapping("playlists/{id}")
 		public List<Song> getSongsByPlaylistId(@PathVariable("id") Integer id) {
 			return ss.findSongsByPlaylistId(id);
@@ -60,7 +61,7 @@ public class SongController {
 			return ss.findSongsByPlaylistByUserId(id);
 		}
 		*/
-		
+		@CrossOrigin("http://localhost:4200")
 		@PostMapping
 		public ResponseEntity<Song> addSong(@RequestParam("playlistId") Integer playlistId, @RequestParam("songName") String songName, @RequestParam("artistName") String artistName, @RequestParam("spotifySongId") String spotifySongId) {
 			Song s = ss.addSong(new Song(songName, artistName, spotifySongId));
@@ -102,13 +103,13 @@ public class SongController {
 			return new ResponseEntity<Song>(s, HttpStatus.CREATED);
 		}
 		*/
-
+		@CrossOrigin("http://localhost:4200")
 		@PutMapping("/{id}")
 		public Song updateSong(@PathVariable("id") Integer id, @RequestBody Song Song) {
 			Song.setSongId(id);
 			return ss.updateSong(Song);
 		}
-
+		@CrossOrigin("http://localhost:4200")
 		@DeleteMapping("/{id}")
 		public Song deleteSong(@PathVariable("id") Integer id, @RequestParam("playlistId") Integer playlistId) {
 			

@@ -16,12 +16,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<executable>true</executable>
-				</configuration>
+        <executable>true</executable>
+      </configuration>
+				
 			</plugin>
 		</plugins>
 	</build>
-	<!-- -->
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

@@ -9,6 +9,7 @@ import com.revature.models.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public User findUserByEmailAndPassword(String email, String password);
+	//Hibernate: getUserByUsernameAndPassword(String u, String p)
 	public User findUserByUsernameAndPassword(String username, String password);
 	public User findAllPlaylistsByUserId(Integer id);
 	public List<User> findAllUsersByUsernameLike(String s);

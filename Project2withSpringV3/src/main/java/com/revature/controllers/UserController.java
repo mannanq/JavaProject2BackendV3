@@ -58,7 +58,7 @@ public class UserController {
 		//System.out.println(userid + " : " + playlistid);
 		return ps.findPlaylistById(playlistid);
 	}
-	
+	@CrossOrigin("http://localhost:4200")
 	@GetMapping("/{userid}/playlists/{playlistid}/songs")
 	public Playlist getSongstByUserIdAndPlaylistId(@PathVariable("userid") Integer userid, @PathVariable("playlistid") Integer playlistid) {
 		//System.out.println("THIS IS MY ID: "+id);
@@ -83,19 +83,19 @@ public class UserController {
 		return ps.findPlaylistById(playlistid);
 	}
 	*/
-	
+	@CrossOrigin("http://localhost:4200")
 	@PostMapping
 	public ResponseEntity<User> addUser(@RequestBody User User){
 		us.addUser(User);
 		return new ResponseEntity<User>(User, HttpStatus.CREATED);
 	}
-	
+	@CrossOrigin("http://localhost:4200")
 	@PutMapping("/{id}")
 	public User updateUser(@PathVariable("id")Integer id, @RequestBody User User) {
 		User.setUserId(id);
 		return us.updateUser(User);
 	}
-	
+	@CrossOrigin("http://localhost:4200")
 	@DeleteMapping("/{id}")
 	public User deleteUser(@PathVariable("id")Integer id) {
 		return us.deleteUser(new User(id));

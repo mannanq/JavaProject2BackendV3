@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ public class AuthController {
 	private UserService us;
 	
 	// need to set auth token
+	@CrossOrigin("http://localhost:4200")
 	@PostMapping()
 	public User getUserByEmailAndPassword(@RequestParam("email") String email, @RequestParam("password") String password) {
 		
